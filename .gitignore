@@ -1,0 +1,31 @@
+# Lambda deployment artifacts
+lambda_function.zip
+packaged-template.yaml
+
+# Lambda test response
+response.json
+
+# macOS
+.DS_Store
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Virtual environments
+venv/
+env/
+ENV/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs
+*.log

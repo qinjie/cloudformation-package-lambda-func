@@ -101,6 +101,30 @@ This is expected behavior - CloudFormation uses content hashing to detect that n
 
 ## How It Works
 
+### Deployment Workflow
+
+```mermaid
+flowchart TD
+    A[Start: ./deploy.sh bucket-name] --> B[Zip Lambda Function]
+    B --> C[lambda_function.zip created]
+    C --> D[AWS CloudFormation Package]
+    D --> E[Upload zip to S3 with content hash]
+    E --> F[Generate packaged-template.yaml]
+    F --> G{Code Changed?}
+    G -->|Yes| H[AWS CloudFormation Deploy]
+    G -->|No| I[Skip Deployment - No Changes]
+    H --> J[Create/Update IAM Role]
+    J --> K[Create/Update Lambda Function]
+    K --> L[Deployment Complete]
+    I --> L
+
+    style A fill:#e1f5ff
+    style L fill:#c8e6c9
+    style I fill:#fff9c4
+```
+
+### Package Command Details
+
 The `aws cloudformation package` command:
 
 - Uploads local code artifacts to S3
